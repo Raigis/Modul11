@@ -18,7 +18,7 @@ char shifting (char start, int shift){
 
 std::string encrypt_caesar(std::string text, int shift){
     std::string result;
-    for(int i = 0; i< text.length(); i++){
+    for(int i = 0; i < text.length(); i++){
         result += shifting(text[i], shift);
     }
     return result;
@@ -31,6 +31,6 @@ int main(){
     std::getline(std::cin, text);
     std::cout << "Enter the shift: ";
     std::cin >> shift;
-    std::cout << "\nEncryp123ted text:\n" << encrypt_caesar(text, shift);
+    std::cout << "\nEncrypted text:\n" << encrypt_caesar(text, shift) << std::endl;
     return 0;
 }
