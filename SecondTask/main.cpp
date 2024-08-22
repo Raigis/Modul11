@@ -16,6 +16,7 @@
 #include <vector>
 
 std::string filling(){
+    // Наполнение строки-словаря для четвёртой проверки.
     std::string dictionary;
     for (char i = 'a'; i <= 'z'; i++) dictionary += i;
     for (char i = 'A'; i <= 'Z'; i++) dictionary += i;
@@ -24,6 +25,7 @@ std::string filling(){
 }
 
 bool comparison(std::string part, std::string dictionary){
+    // Функция сравнения для четвёртой проверки.
     bool match;
     for(int i = 0; i < part.length(); i++){
         match = false;
@@ -39,6 +41,8 @@ bool comparison(std::string part, std::string dictionary){
 }
 
 std::vector<int> is_correct_level4(std::vector<std::string> email){
+    // Четвёртая проверка.
+    // Проверяет наличие недопустимых символов в обеих частях.
     std::vector<bool> isCorrect (2, false);
     for (int i = 0; i < email.size(); i++) {
         std::string dictionary = filling();
@@ -59,6 +63,7 @@ std::vector<int> is_correct_level4(std::vector<std::string> email){
 }
 
 std::vector<std::string> separation(std::string email){
+    // Делит адрес на две части: до @ и после @.
     std::vector<std::string> separatedEmail {"", ""};
     bool isAt = false;
     for (int i = 0; i < email.length(); i++) {
@@ -74,6 +79,8 @@ std::vector<std::string> separation(std::string email){
 }
 
 std::vector<int> is_correct_level3(std::vector<std::string> email){
+    // Третья проверка.
+    // Проверяет соответсвие длин двух частей правилам.
     for (int i = 0; i < email.size(); i++) {
         if (email[i].length() > 64 - i || email[i].length() == 0) {
             if (i == 0) {
@@ -87,6 +94,8 @@ std::vector<int> is_correct_level3(std::vector<std::string> email){
 }
 
 std::vector<int> is_correct_level2 (std::string email){
+    // Вторая проверка.
+    // Проверяется количество символов @ и случай с двумя точками подряд.
     bool prevDot = false;
     bool isAt = false;
     for (int i = 0; i < email.length(); i++) {
@@ -109,6 +118,8 @@ std::vector<int> is_correct_level2 (std::string email){
 }
 
 std::vector<int> is_correct_level1 (std::string email){
+    // Первая проверка.
+    // Проверяется общая длина адресв и наличие/отсутствие точек в начале или конце.
     if (!(email.length() >= 3 && email.length() <= 128)) {
         return {0, 0};
     } else if (!(email[0] != '.' && email[email.length()-1] != '.')) {
@@ -119,6 +130,7 @@ std::vector<int> is_correct_level1 (std::string email){
 }
 
 void print_error_code (int code){
+    // Список кодов возможных ошибок с пояснениями. 
     switch (code) {
     case 0:
         std::cout << "Error code: " << code << ".\nIncorrect total length." << std::endl; 
@@ -142,10 +154,10 @@ void print_error_code (int code){
         std::cout << "Error code: " << code << ".\nThere are two dots in a row." << std::endl; 
         break;
     case 7:
-        std::cout << "Error code: " << code << ".\nThere is a forbidden symbol in the left part." << std::endl; 
+        std::cout << "Error code: " << code << ".\nInvalid characters on the left part." << std::endl; 
         break;
     case 8:
-        std::cout << "Error code: " << code << ".\nThere is a forbidden symbol in the right part." << std::endl; 
+        std::cout << "Error code: " << code << ".\nInvalid characters on the right part." << std::endl; 
         break;
     default:
         std::cout << "Error code: -1.\nUnknown error." << std::endl;
