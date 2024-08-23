@@ -84,9 +84,9 @@ std::vector<int> is_correct_level3(std::vector<std::string> email){
     for (int i = 0; i < email.size(); i++) {
         if (email[i].length() > 64 - i || email[i].length() == 0) {
             if (i == 0) {
-                return {0, 1};
-            } else {
                 return {0, 2};
+            } else {
+                return {0, 3};
             }
         }
     }
@@ -102,17 +102,17 @@ std::vector<int> is_correct_level2 (std::string email){
         if (email[i] == '@' && !isAt) {
             isAt = true;
         } else if (email[i] == '@' && isAt) {
-            return {0, 4};
+            return {0, 5};
         }
         if (email[i] == '.' && !prevDot) {
             prevDot = true;
         } else if (email[i] == '.' && prevDot) {
-            return {0, 6};
+            return {0, 7};
         } else {
             prevDot = false;
         }
     }
-    if (!isAt) return {0, 3};
+    if (!isAt) return {0, 4};
     std::vector<std::string> separatedEmail = separation(email);
     return is_correct_level3(separatedEmail);
 }
@@ -121,9 +121,9 @@ std::vector<int> is_correct_level1 (std::string email){
     // Первая проверка.
     // Проверяется общая длина адресв и наличие/отсутствие точек в начале или конце.
     if (!(email.length() >= 3 && email.length() <= 128)) {
-        return {0, 0};
+        return {0, 1};
     } else if (!(email[0] != '.' && email[email.length()-1] != '.')) {
-        return {0, 5};
+        return {0, 6};
     } else {
         return is_correct_level2(email);
     }
@@ -132,31 +132,31 @@ std::vector<int> is_correct_level1 (std::string email){
 void print_error_code (int code){
     // Список кодов возможных ошибок с пояснениями. 
     switch (code) {
-    case 0:
+    case 1:
         std::cout << "Error code: " << code << ".\nIncorrect total length." << std::endl; 
         break;
-    case 1:
+    case 2:
         std::cout << "Error code: " << code << ".\nIncorrect length of the left part." << std::endl; 
         break;
-    case 2:
+    case 3:
         std::cout << "Error code: " << code << ".\nIncorrect length of the right part." << std::endl; 
         break;
-    case 3:
+    case 4:
         std::cout << "Error code: " << code << ".\nThe '@' symbol is missing." << std::endl; 
         break;
-    case 4:
+    case 5:
         std::cout << "Error code: " << code << ".\nMore than one '@' character." << std::endl; 
         break;
-    case 5:
+    case 6:
         std::cout << "Error code: " << code << ".\nThe dot is at the beginning or end." << std::endl; 
         break;
-    case 6:
+    case 7:
         std::cout << "Error code: " << code << ".\nThere are two dots in a row." << std::endl; 
         break;
-    case 7:
+    case 8:
         std::cout << "Error code: " << code << ".\nInvalid characters on the left part." << std::endl; 
         break;
-    case 8:
+    case 9:
         std::cout << "Error code: " << code << ".\nInvalid characters on the right part." << std::endl; 
         break;
     default:
